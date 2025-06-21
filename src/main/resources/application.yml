@@ -11,3 +11,9 @@ logging:
     org.springframework: INFO
   file:
     name: logs/spring-ai-chatbot.log
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
