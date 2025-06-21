@@ -1,4 +1,4 @@
-package org.example.springaichatbot.config;
+package org.example.springaichatbot.service;
 
 import java.util.List;
 import org.springframework.ai.chat.model.ChatResponse;

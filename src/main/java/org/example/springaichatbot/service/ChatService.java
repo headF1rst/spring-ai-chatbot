@@ -2,6 +2,8 @@ package org.example.springaichatbot.config;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.example.springaichatbot.service.ChatUseCase;
+import org.example.springaichatbot.util.PromptLoader;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -16,14 +18,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ChatService implements ChatUseCase {
     private final OpenAiApi openAiApi;
+    private final PromptLoader promptLoader;
 
     private static final String OPEN_AI_MODEL = "gpt-3.5-turbo";
+    private static final String SYSTEM_PROMPT_PATH = "prompts/system-prompt.md";
 
     @Override
     public ChatResponse getOpenAiResponse(String userMessage, List<String> stop, Double temperature) {
+        String systemPromptContent = promptLoader.loadPrompt(SYSTEM_PROMPT_PATH);
+        
         List<Message> messages = List.of(
             SystemMessage.builder()
-                .text("여기 뭐 들어가야하는거지")
+                .text(systemPromptContent)
                 .build(),
             UserMessage.builder()
                 .text(userMessage)
