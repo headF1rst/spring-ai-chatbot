@@ -1,1 +1,13 @@
-spring.application.name=spring-ai-chatbot
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    org.example.springaichatbot: INFO
+    org.springframework: INFO
+  file:
+    name: logs/spring-ai-chatbot.log
