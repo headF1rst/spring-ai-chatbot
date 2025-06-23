@@ -2,6 +2,7 @@ package org.example.springaichatbot.llm.provider;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.springaichatbot.llm.LlmModelStrategy;
 import org.example.springaichatbot.llm.ModelProvider;
 import org.springframework.ai.chat.messages.Message;
@@ -14,6 +15,7 @@ import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.api.OpenAiApi;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OpenAiModelStrategy implements LlmModelStrategy {
@@ -39,7 +41,9 @@ public class OpenAiModelStrategy implements LlmModelStrategy {
             .openAiApi(openAiApi)
             .build();
 
-        return chatModel.call(prompt);
+        ChatResponse response = chatModel.call(prompt);
+        log.info("OpenAI response: {}", response);
+        return response;
     }
 
     @Override
